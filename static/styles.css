@@ -1,3 +1,22 @@
 #map { 
     height: 750px; 
 }
+
+  #form-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  #form-container label {
+    margin: 0 10px;
+  }
+  
+  #form-container input[type="date"],
+  #form-container input[type="submit"] {
+    margin: 0 5px;
+  }
+  
+  #form-container input[type="submit"] {
+    margin-top: 10px;
+  }

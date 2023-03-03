@@ -1,44 +1,45 @@
-{% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
-
-{% block heading %}
-    ENGO 551 Lab 3 Search
-{% endblock %}
-
-{% block body %}
-    <div class="container">
-        <div id="dates">
-            <form id = "myForm" action="">
-                <label for="start_date">Start Date:</label>
-                <input type="date" id="start_date" name="start_date"><br><br>
-                <label for="end_date">End Date:</label>
-                <input type="date" id="end_date" name="end_date"><br><br>
-                <input type="submit" value="Submit">
-            </form>
-            <script>
-                $(function() {
-                  // Add an event handler to the form submission event
-                  $('#myForm').on('submit', function(event) {
-                    // Prevent the default form submission behavior
-                    event.preventDefault();
-  
-                    // Get the selected start and end dates from the date range picker widget
-                    var selectedStartDate = $('#start_date').val();
-                    var selectedEndDate = $('#end_date').val();
-                    var formattedStartDate = moment(selectedStartDate).format('YYYY-MM-DDTHH:mm:ss.SSS');
-                    var formattedEndDate = moment(selectedEndDate).format('YYYY-MM-DDTHH:mm:ss.SSS');
-                    window.S_Date = formattedStartDate;
-                    window.E_Date = formattedEndDate;
-                    // Do something with the selected start and end dates
-                    console.log('Start date:', formattedStartDate);
-                    console.log('End date:', formattedEndDate);
-  
-                    // Submit the form using AJAX or perform any other necessary action
-                  });
-                });
-        </script>
-        </div>
-        <h1>Search</h1>
-        <div id="map"></div>
+{% extends "base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block
+heading %} ENGO 551 Lab 3 Building Permits Search {% endblock %} {% block body %}
+<div class="container">
+  <div id="dates">
+    <br />
+    <div id="form-container" style="text-align: center;">
+      <form id="myForm" action="">
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" />
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" />
+        <input type="submit" value="Submit" />
+      </form>
     </div>
+    <script>
+      $(function () {
+        // Add an event handler to the form submission event
+        $("#myForm").on("submit", function (event) {
+          // Prevent the default form submission behavior
+          event.preventDefault();
+
+          // Get the selected start and end dates from the date range picker widget
+          var selectedStartDate = $("#start_date").val();
+          var selectedEndDate = $("#end_date").val();
+          var formattedStartDate = moment(selectedStartDate).format(
+            "YYYY-MM-DDTHH:mm:ss.SSS"
+          );
+          var formattedEndDate = moment(selectedEndDate).format(
+            "YYYY-MM-DDTHH:mm:ss.SSS"
+          );
+          window.S_Date = formattedStartDate;
+          window.E_Date = formattedEndDate;
+          // Do something with the selected start and end dates
+          console.log("Start date:", formattedStartDate);
+          console.log("End date:", formattedEndDate);
+
+          // Submit the form using AJAX or perform any other necessary action
+        });
+      });
+    </script>
+  </div>
+  <br>
+  <div id="map"></div>
+</div>
 {% endblock %}
