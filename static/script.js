@@ -128,20 +128,7 @@ $(document).ready(function () {
     .openPopup();
   //.bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
 
-  const form = document.getElementById("dates");
-  /*
   var mapbox1 = L.tileLayer(
-    "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
-    {
-      attribution:
-        'Map data &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
-      id: "zifanzhang12345/clezxrw8c000401qm3j7rnuda", // Replace with your own Mapbox style ID
-      accessToken:
-        "pk.eyJ1IjoiemlmYW56aGFuZzEyMzQ1IiwiYSI6ImNsZXo0aWt6bDBvajIzeG8wdHFjYmZydzgifQ.14P31UjREuVFl0CfgVeBLg",
-    }
-  ).addTo(map);
-  */
-  var mapbox2 = L.tileLayer(
     "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
     {
       attribution:
@@ -152,10 +139,14 @@ $(document).ready(function () {
     }
   ).addTo(map);
 
-  var Layers = {
-    "Building Permit": baseLayer,
-    Tyson: mapbox2,
+  const form = document.getElementById("dates");
+
+  var baseLayers = {
+    "Bulding Permits": baseLayer,
+    "Mapbox 1": mapbox1,
   };
+
+  L.control.layers(baseLayers).addTo(map);
 
   form.addEventListener("submit", (event) => {
     map.eachLayer(function (layer) {
@@ -176,23 +167,11 @@ $(document).ready(function () {
 
     var markers = L.markerClusterGroup();
 
-    console.log(mapbox2._url);
     fetch(
       `https://data.calgary.ca/resource/c2es-76ed.geojson?$where=issueddate > \'${startdate}\' and issueddate< \'${enddate}\'`
     )
       .then((response) => response.json())
       .then((data) => {
-        var mapbox2 = L.tileLayer(
-          "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
-          {
-            attribution:
-              'Map data &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
-            id: "ttoews45/cleuc9bej000f01p5r173pdy8", // Replace with your own Mapbox style ID
-            accessToken:
-              "pk.eyJ1IjoidHRvZXdzNDUiLCJhIjoiY2xldWJ5MjQwMDZkNzNxcnRuZHd5eXpqOSJ9.vxwK3vw-CjJH5GF9ihrpsg&zoomwheel=true&fresh=true#9.88/51.0167/-114.0239",
-          }
-        ).addTo(map);
-
         // Use the GeoJSON data here
         var temp = L.geoJSON(data, {
           style: myStyle,

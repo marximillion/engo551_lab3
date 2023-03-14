@@ -1,9 +1,15 @@
-{% extends "base.html" %} {% import "bootstrap/wtf.html" as wtf %} {% block
-heading %} ENGO 551 Lab 3 Building Permits Search {% endblock %} {% block body %}
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block heading %} ENGO 551 Lab 3 Building Permits Search {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="static/styles.css">
+<script src="static/script.js"></script>
+{% endblock %}
+{% block body%}
 <div class="container">
   <div id="dates">
     <br />
-    <div id="form-container" style="text-align: center;">
+    <div id="form-container" style="text-align: center">
       <form id="myForm" action="">
         <label for="start_date">Start Date:</label>
         <input type="date" id="start_date" name="start_date" />
@@ -39,7 +45,7 @@ heading %} ENGO 551 Lab 3 Building Permits Search {% endblock %} {% block body %
       });
     </script>
   </div>
-  <br>
+  <br />
   <div id="map"></div>
 </div>
 {% endblock %}

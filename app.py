@@ -41,6 +41,7 @@ Session(app)
 def main():
     return render_template("index.html")
 
+
 @app.route("/api", methods=["GET", "POST"])
 def api():
 
@@ -53,15 +54,22 @@ def api():
 
     return render_template("api.html", data=res.text)
 
+
 @app.route('/search', methods=["GET", "POST"])
 def search():
     start_date = request.form.get('start_date')
     end_date = request.form.get('end_date')
-    #url = f'https://data.calgary.ca/resource/c2es-76ed.geojson?$where=issueddate > '{start_date}' and issueddate < '{end_date}'&$select=issueddate,workclassgroup,contractorname,communityname,originaladdress,latitude,longitude'
+    # url = f'https://data.calgary.ca/resource/c2es-76ed.geojson?$where=issueddate > '{start_date}' and issueddate < '{end_date}'&$select=issueddate,workclassgroup,contractorname,communityname,originaladdress,latitude,longitude'
     url = f'https://data.calgary.ca/resource/c2es-76ed.geojson?$where=issueddate > "{start_date}" and issueddate < "{end_date}"&$select=issueddate,workclassgroup,contractorname,communityname,originaladdress,latitude,longitude'
     response = requests.get(url)
     data = response.json()
     return render_template("search.html", data=data)
+
+
+@app.route('/mapbox', methods=["GET", "POST"])
+def mapbox():
+    return render_template("mapbox.html")
+
 
 if __name__ == 'main':
     app.run(debug=True)
