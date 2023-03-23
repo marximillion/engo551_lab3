@@ -71,5 +71,10 @@ def mapbox():
     return render_template("mapbox.html")
 
 
+@app.route('/lab5', methods=["GET", "POST"])
+def lab5():
+    return render_template("lab5-zifan.html")
+
+
 if __name__ == 'main':
     app.run(debug=True)
